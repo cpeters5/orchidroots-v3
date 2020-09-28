@@ -936,6 +936,7 @@ def browse(request,gen=None):
     import collections
     subgenus = ''
     section = ''
+    type = ''
     subsection = ''
     series = ''
     subgenus_obj = ''
@@ -1005,6 +1006,8 @@ def browse(request,gen=None):
 
     if 'type' in request.GET:
         type = request.GET['type']
+    else:
+        type = 'species'
 
     intragen_list = subgenus_list = section_list = subsection_list = series_list = []
     intragen_list = Intragen.objects.filter(gen=gen)
