@@ -1,0 +1,186 @@
+{% load static %}
+{% include "base.html" %}
+{% block body %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/css/lightbox.css' %}">
+    <script type="text/javascript" src="{% static 'utils/js/lightbox.js' %}"></script>
+</head>
+
+<style>
+   .mylist {
+        max-height:400px;
+        overflow-y: auto;
+        font-size:12px;
+        color: blue;
+        line-height: 1;
+    }
+
+.thumbnails {
+   object-fit: cover;
+   overflow: hidden;
+   height: 16vw;
+   width : 16vw;
+   padding:2px 1px 3px 1px;
+
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.text-c {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+}
+.imgcaption {
+    font-size: 11px;
+    width:90%;
+    padding:0;
+    height: 20px;
+    border:0 solid green;
+    margin:0 auto;
+    min-height:60px;
+    text-align:left;
+    /*padding:0 10px;*/
+    word-wrap: normal;"
+    overflow: hidden;
+}
+.imgcaption_top {
+    font-size: 16px;
+    margin:5px 0 0 0;
+    padding:0;
+    height: 20px;
+    /*overflow: hidden;*/
+}
+.imageitem {
+    display:inline-block;
+    border:1px solid lightgrey;
+    margin:0 5px;
+    width : 17vw;
+    background-color: #eaeaea;
+}
+.image {
+    border:0 solid red;
+    /*margin*/
+    /*margin:0 0 30px 0;*/
+    /*padding:0 0 30px 0;*/
+
+}
+
+@media only screen and (max-width: 830px) {
+
+    div.text-c {
+        font-size: 10px;
+    }
+    .thumbnails {
+       height: 22vw;
+       width : 22vw;
+       /*padding:2px 1px 3px 1px;*/
+    }
+    .imageitem {
+        width : 23vw;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+}
+
+.box {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    /*margin: 3px 10px;*/
+    /*border:1px solid grey;*/
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+</style>
+<br>
+<br>
+
+<div style="width:95%;margin:0 auto;clear:both;">
+
+    <div class="container-fluid" style="min-height:200px;border:0 solid grey;padding:0">
+    <div class="row">
+        <div class="col-sm-2 hidden-xs" style="padding:0; border:1px solid lightgrey">
+            {% include "membership/sidebar.html" %}
+        </div>
+
+        <div class="col-sm-10 hidden-xs" style="padding:0; border:1px solid blue">
+
+
+            {% include "membership/member-nav.html" %}
+
+            <div class="tab-content clearfix" style="background-color: white; margin:0 auto;border-left:1px solid lightgrey;border-right:1px solid lightgrey;border-bottom:1px solid lightgrey;">
+                <div class="d-flex flex-row bd-highlight mb-3">
+                    <div class="p-2">
+                        <div style="margin:0; text-align: center;min-height:200px;">
+                        {% if page_list %}
+                            <h5>Browse Images by Genus</h5>
+                            <br>
+                            <div style="margin:0 auto; width:200px;">
+                                {% if last_page > 1 %} {% include "orchidlist/paginator_brwgen.html" %}
+                                {% else %}<br>
+                                {% endif %}
+                            </div>
+                            {% for x in page_list %}
+                                <div class="imageitem">
+                                    <div class="imgcaption_top">
+                                        <i>{{x.0.pid.pid.genus}}</i>
+                                    </div>
+                                    <div class="image">
+                                            <div class="box">
+                                        <a href="{% url 'detail:myphoto' x.0.pid_id %}?tab=pri&author={{author.author_id}}&att=">
+                                                <img class="thumbnails" alt="" src="{% static x.0.image_dir %}{{ x.0.image_file }}">
+<!--                                                <div class="text-c"><i>{{x.0.pid.pid.species}}</i></div>-->
+                                        </a>
+                                            </div>
+                                    </div>
+                                    <div class="imgcaption">
+                                                    {{x.0.pid.pid.name|safe}} {{x.0.pid.pid.author}} {{x.0.pid.pid.year}}
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div style="width:100%;font-size:14px;text-align:left;padding: 20px;">
+                                <h5>Photo collection is empty!</h5>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

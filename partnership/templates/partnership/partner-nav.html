@@ -1,0 +1,44 @@
+<style>
+    .nav-tabs {
+        font-size:13px;
+    }
+    @media only screen and (max-width: 500px) {
+        .nav-tabs {
+            font-size:9px
+        }
+        .nav-item {
+            width:70px;
+            /*min-height:70px;*/
+        }
+
+    }
+
+
+</style>
+
+
+
+<div style="font-size: 13px;width:100%;margin:0;padding:0;">
+    <ul class="nav nav-tabs">
+    {% if tab == 'brg' or tab == 'brs' or tab == 'brh' %}
+            <li class="nav-item"><a class="nav-link {{brg}}" href="{% url 'partnership:browsegen' partner.partner_id %}?tab=brg&att="><span style="color:#575757;">Genera</span></a></li>
+            <li class="nav-item"><a class="nav-link {{brs}}" href="{% url 'partnership:browse' partner.partner_id  %}?tab=brs&type=species&att="><span style="color:#575757;">Species</span></a></li>
+            <li class="nav-item"><a class="nav-link {{brh}}" href="{% url 'partnership:browse' partner.partner_id  %}?tab=brh&type=hybrid&att="><span style="color:#575757;">Hybrid</span></a></li>
+    {% else %}
+        {% if species.type == 'species' %}
+            <li class="nav-item dropdown">
+                <a class="nav-link {{spc}} dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'partnership:species' partner.partner_id %}?pid={{species.pid.pid}}&tab=hyb&att="><span style="color:#575757;">Summary</span></a>
+                <a class="dropdown-item" href="{% url 'partnership:species' partner.partner_id %}?pid={{species.pid.pid}}&tab=hyb&att="><span style="color:#575757;">Summary</span></a>
+                </div>
+            </li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link {{hyb}}" href="{% url 'partnership:hybrid' partner.partner_id %}?pid={{species.pid.pid}}&tab=hyb&att="><span style="color:#575757;">Hybrid</span></a></li>
+        {% endif %}
+        <li class="nav-item"><a class="nav-link {{upl}}" href="#"><span style="color:#575757;">Upload</span></a></li>
+    {% endif %}
+
+    </ul>
+</div>
+

@@ -1,0 +1,57 @@
+{% load static %}
+{% include "base.html" %}
+{% block body %}
+
+<br><br><br>
+<style>
+#donateamt{
+    width:80px;
+    align:center;
+}
+li {
+        display:inline-block;
+        /*display:inline; !*IE7*!*/
+        /*zoom:1; !*IE7*!*/
+        /*background:white;*/
+        color:white;
+        margin-right:10px;
+}
+</style>
+<div class="container" style="width:100%; margin:0 auto;">
+    {% if donateamt > 0 %}
+        <h4 align="center">Thank you for your ${{donateamt_display}} contribution</h4>
+    {% else %}
+        <h4 align="center">Thank you for your contribution</h4>
+    {% endif %}
+
+    <br>
+    {% if donateamt > 0 %}
+        <form align="middle" action="{% url 'membership:donate' donateamt %}" method="post">
+            {% csrf_token %}
+<!--            <input type="hidden" name="donateamt" value="{{donateamt}}" />-->
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ key }}"
+                data-description="A Django Charge"
+                data-amount="{{donateamt}}"
+                data-locale="auto">
+            </script>
+        </form>
+    {% else %}
+        <div class="container" align="center">
+
+            <span class="tooltiptext">Choose the amount of donation</span>
+            <a class="dropdown-toggle filtbtn filtbtn1" type="button" data-toggle="dropdown" style="font-size:12px; width:150px ;border:1px solid #ccc" href="{% url 'membership:donateapp' 1000 %}">$10</a>
+            <ul class="dropdown-menu" id="donateamt" style="font-size: 11px;padding:5px;" align="center">
+                <li><a href="{% url 'membership:donateapp' 500 %}">$5</a></li>
+                <li><a href="{% url 'membership:donateapp' 1000 %}">$10</a></li>
+                <li><a href="{% url 'membership:donateapp' 1500 %}">$15</a></li>
+                <li><a href="{% url 'membership:donateapp' 2000 %}">$20</a></li>
+            </ul>
+
+            <br>
+       </div>
+
+    {% endif %}
+</div>
+
+{% endblock %}

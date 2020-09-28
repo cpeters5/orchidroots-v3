@@ -1,0 +1,787 @@
+{% load static %}
+{% include "partnership/partner_base.html" %}
+{% include 'detail/detail-title.html' %}
+{% block body %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'utils/css/lightbox.css' %}">
+    <script type="text/javascript" src="{% static 'utils/js/lightbox.js' %}"></script>
+</head>
+
+<style>
+
+.button {
+    background-color: #cad6d0;
+    border: 2px solid #67928d;
+    border-radius: 3px;
+    color: #454545;
+    width: 120px;
+    font-size: 12px;
+    margin: 0 12px 0 12px;
+    padding: 3px 3px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.parent {
+    min-height:190px;
+    background-color: #f4f4f6;
+    width: 100%;
+    border: 1px solid #aaa;
+    margin: 0 0 8px 0;
+    padding: 12px 5px 5px 3px;
+}
+
+.parent-text {
+    font-size:12px;
+}
+
+.s {
+    height:50px;
+    display:block;
+    float: left;
+    width:49.5%;
+    padding-left: 5px;
+    padding-right: 2px;
+    text-align: center;
+    border: 0 solid #aaa;
+}
+
+.ss {min-height:140px;max-height:180px;height:auto;float:left; text-align:center;width:48%; background-color: #f4f4f6; padding: 8px 8px 8px 8px; border:1px solid #aaa;}
+.sp {min-height:140px;max-height:180px;height:auto;float:right;text-align:center;width:48%; background-color: #f4f4f6; padding: 8px 8px 8px 8px; border:1px solid #aaa;}
+.sp-none {min-height:140px;}
+.ss-none {min-height:140px;}
+.anc {
+    margin:0 auto; text-align:center;padding: 10px 3px 3px 3px; border:1px solid #aaa; background-color: #f4f4f6;
+}
+
+.offsp {
+    font-size:12px;
+}
+
+div.text-c {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+}
+.imgcaption {
+    font-size: 17px;
+    margin:5px 0 0 0;
+    padding:0;
+    height: 20px;
+    /*overflow: hidden;*/
+}
+
+@media only screen and (max-width: 800px){
+    .imgcaption {
+        font-size: 10px;
+        height: 40px;
+    }
+    .parent {
+        min-height:30px;
+        font-size:10px;
+    }
+    .parent-text {
+        font-size:12px;
+    }
+    .ss {min-height:40px;}
+    .sp {min-height:40px;}
+    .ps {min-height:40px;}
+    .pp{min-height:40px;}
+    .offsp {
+        font-size:11px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .imgcaption {
+        margin: 0 auto;
+        font-size: 10px;
+        height: 35px;
+        overflow: auto;
+        width: 100%;
+    }
+   .parent {
+        min-height:20px;
+        font-size:5px;
+    }
+    .parent-text {
+        font-size:10px;
+    }
+    .s {
+        height: 30px;
+    }
+    .ss {
+        min-height:40px;
+        font-size:6px;
+        height: 100px;
+    }
+    .sp {
+        min-height:40px;
+        font-size:6px;
+        height: 100px;
+    }
+    .anc {
+
+    }
+    .offsp {
+        font-size:9px;
+    }
+
+}
+* {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    border-radius: 0;
+    border: 0 solid #ccc;
+    border-shadow: None;
+}
+
+.button {
+    background-color: black;
+    width: 250px;
+    height: 35px;
+    border: none;
+    color: white;
+    padding: 4px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 13px;
+    margin: 0 2px 0 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: #eae6eb;
+    color: #334455;
+    border: 1px solid #acaf9c;
+}
+
+.button1:hover {
+    text-decoration: none;
+    background-color: #babbc1;
+    color: white;
+}
+
+a.fam {
+    border:0;
+    font-size: 9px !important;
+}
+
+#myselectbox {
+    float:left;
+    width:180px;
+    height: 25px;
+    background-color: #f7f7f7;
+    margin-right:2px;
+}
+.border-lb {
+    border: 1px solid #ccc;
+    border-width: 0 0 1px 1px;
+}
+.border-rb {
+    border: 1px solid #ccc;
+    border-width: 0 1px 1px 1px;
+}
+
+    /*Display square image*/
+.thumbnails {
+   object-fit: cover;
+   overflow: hidden;
+   height: 12vw;
+   width : 12vw;
+   padding:2px;
+}
+.thumbnails1 {
+   height: 16vw;
+   width : 16vw;
+}
+.thumbnails2 {
+   height: 11vw !important;
+   width : 11vw !important;
+}
+.thumbnails3 {
+   height: 8vw !important;
+   width : 8vw !important;
+    border:1px solid lightgrey;
+    padding:0 !important;
+    margin:0 !important;
+}
+@media only screen and (max-width: 850px) {
+    .thumbnails1 {
+       height: 35vw;
+       width : 35vw;
+    }
+    .thumbnails2 {
+       height: 14vw !important;
+       width : 14vw !important;
+    }
+    .thumbnails3 {
+       height: 14vw !important;
+       width : 14vw !important;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .thumbnails1 {
+       height: 35vw;
+       width : 35vw;
+    }
+    .thumbnails2 {
+       height: 14vw !important;
+       width : 14vw !important;
+    }
+    .thumbnails3 {
+       height: 14vw !important;
+       width : 14vw !important;
+    }
+
+}
+.box {
+    position: relative;
+    display: inline-block;
+    background: lightgrey;
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding:0;
+}
+
+
+div.text {
+    position: absolute;
+    font-size:10px;
+    color: white
+}
+
+div.text-tl {
+    top: 2px;
+    left: 6px;
+}
+
+div.text-bl {
+    bottom: 2px;
+    left: 6px;
+}
+
+
+div.text-tr {
+    top: 2px;
+    right: 6px;
+}
+
+div.text-br {
+    position: absolute;
+    bottom: 2px;
+    right: 6px;
+}
+
+div.text-c {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.text-bl a {
+    color: #2fffff;
+}
+
+/*Lightbox tweaking. Do not remove.*/
+.lb-dataContainer {
+    background-color:white;
+}
+    .lb-caption {
+
+        color:black;
+    }
+    .lb-closeContainer {
+        color: black;
+    }
+
+
+.box {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    margin: 3px 10px;
+    /*border:1px solid grey;*/
+}
+
+.imageitem {
+    display:inline-block;
+    border:1px solid lightgrey;
+    margin:0 5px;
+    width : 22vw;
+    background-color: white;
+}
+.image {
+    border:0 solid red;
+    /*margin*/
+    /*margin:0 0 30px 0;*/
+    /*padding:0 0 30px 0;*/
+
+}
+img{
+    width:100%;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+</style>
+
+<div style="width:95%;margin:0 auto">
+    <div class="container-fluid" style="min-height:200px;border:0 solid grey;padding:0">
+        <!-- Main -->
+
+        <div class="row">
+            <div class="col-sm-2 hidden-xs" style="padding:0; border:0 solid lightgrey">
+                {% include "partnership/sidebar.html" %}
+            </div>
+            <div class="col-sm-10 hidden-xs" style="padding:0; border:0 solid lightgrey">
+                {% include "partnership/partner-nav.html" %}
+                <div class="tab-content clearfix" style="padding:20px;background-color: white; margin:0;border-left:1px solid lightgrey;border-right:1px solid lightgrey;border-bottom:1px solid lightgrey">
+
+                <!--Summary-->
+                {%  if tab == "sum" %}
+                    <div class="tab-pane active" id="sum" style="margin: 0 auto; text-align: center;border:0 solid red;">
+        <!--        <div class="tab-pane active" id="sum" style="width:100%; margin: 0 auto;background-color:white;border:0 solid lightgrey;">-->
+                        <div style="display:block; text-align:center;padding:3px;border:0 solid deeppink;font-size: 12px">
+                            <form action="?">
+                                <!--Variety-->
+                                <input type="hidden" name="tab" value="sum" />
+                                <input type="hidden" name="gen" value="{{species.gen.pid}}" />
+                                <input type="hidden" name="pid" value="{{species.pid}}" />
+                                <input name="variety" onfocus="this.select()" value="{{variety}}" placeholder="Filter" data-toggle="tooltip" data-placement="bottom" title="Filter by variety, form, name or synonym" style="border:1px solid #aaa;text-align: left; margin:0 5px; width:200px; height:30px;padding: 3px 15px;font-size:12px;"/>
+                            </form>
+                        </div>
+                    <!--Images    -->
+
+                     <div style="clear:left;"></div>
+                    {% if image_list %}
+                        <div style="clear:left; margin-top:5px;min-height:100px;">
+                            {% for image in image_list %}
+                                <div style="display:inline-block; border:0 solid lightgrey; !important;">
+                                    {% if image.image_file %}
+                                            {% if image.quality == 'CH' %}
+                                                 <a href="{% static image.image_dir %}{{image.image_file}}" data-lightbox="gallery" data-title="
+                                                <h6><small>{{image.id}}: {{image.imgname}}
+                                                <br> {{image.get_displayname}}
+                                                <br>{% if image.text_data %}{{image.text_data|safe}}{% endif %}</small></h6>">
+                                                <div class="box">
+                                                    <img  class="thumbnails thumbnails1"  alt="" src="{% static image.image_dir %}{{image.image_file}}" style="border: 3px solid red;">
+                                                    <div class="text text-tr" ><span style="color:white">{{image.id}}</span></div>
+                                                </div>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% static image.image_dir %}{{image.image_file}}" data-lightbox="gallery" data-title="<h6><small>{{image.id}}: {{image.imgname}} <br> {{image.get_displayname}} <br>{% if image.text_data %}{{image.text_data|safe}}{% endif %}</small></h6>">
+                                                <div class="box">
+                                                    <img  class="thumbnails thumbnails1" alt="" src="{% static image.image_dir %}{{image.image_file}}" style="border: 1px solid darkgrey;padding:0">
+                                                    <div class="text text-br" ><span style="color:white">{{image.id}}</span></div>
+                                                </div>
+                                                </a>
+                                            {% endif %}
+                                    {% else %}
+                                            <div class="box">
+                                                <img  class="thumbnails thumbnails1" alt="" src="{{image.image_url}}">
+                                                <div class="text text-br" ><span style="color:white">{{image.id}}</span></div>
+                                            </div>
+                                    {% endif %}
+                                        {% if user.is_authenticated and user.tier.tier > 10 %}
+                                            {% include 'detail/curate_links.html' %}
+                                        {% else %}
+                                            <div class="imgcaption">
+                                                {% if image.source_url %}
+                                                    <a href="{{image.source_url}}" target="_blank" >{{image.get_displayname}}</a>
+                                                {% else %}
+                                                    {{image.get_displayname}}
+                                                {% endif %}
+                                                <br>
+                                                {{image.imginfo }}
+                                            </div>
+                                        {% endif %}
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div style="width: 100%; font-size:12px;border:0 solid lightgrey; margin:0 auto; text-align: center; padding:10px">No image available.
+                            if you have one please consider uploading it to
+                            <a href="{% url 'detail:myphoto' species.pid %}?tab=sum&att=">My photo</a> tab above, or post it in
+                                <a href="https://www.facebook.com/groups/BlueNanta/?ref=br_rs">Blue Nanta, OrchidRoots User's Group</a> in Facebook.
+                            Any photo selected for public view, copyright credit and a link to your website will be displayed under the image.
+                        </div>
+                    {% endif %}
+                    </div>
+
+                    <hr>
+
+                    <!-- Parent images -->
+                    <div  style="display:block;width:100%; margin: 0 auto;text-align: center; padding: 5px 0 10px 0; border: 0 solid red">
+
+                        <!--Seed Parent-->
+                        <div class="s" style="display:block;float: left; width:49.5%; height:auto; " >
+                            <div style="font-size: 14px; text-align:center"><b>Seed Parent</b></div>
+                            <!--Seed-->
+                            <div class="parent" >
+                                {% if seedimg_list %}
+                                    {% for seed in seedimg_list %}
+                                        <a href="{% static seed.image_dir %}{{seed.image_file}}" data-lightbox="seed" data-title="<h6><small>{{image.id}}: {{seed.imgname}}
+                                            {% if seed.text_data %}{{seed.text_data|safe}}{% endif %}</small></h6>">
+                                                <img  class="thumbnails thumbnails2" alt="" src="{% static seed.image_dir %}{{seed.image_file}}">
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    <img class="thumbnails thumbnails2" alt="" src="{% static 'utils/images/noimage4.jpg' %}" style="border:0"/>
+                                {% endif %}
+                                <div class="parent-text">
+                                    {% if hybrid.seed_id.pid %}
+                                    <a href="{% url 'detail:hybrid' hybrid.seed_id.pid %}?tab=sum&att=">{{hybrid.registered_seed_name|safe}}</a>
+                                    {% if hybrid.seed_id.textspeciesname != hybrid.seed_species %}(syn. {{hybrid.seed_id.namecasual|safe}}){% endif %}
+                                    {% else %}
+                                        No Data
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!--Seed Grand parents-->
+                            {%if hybrid.seed_id.type == 'hybrid' %}
+                                <!--Seed Seed-->
+                                <div class="ss">
+                                    {% if ss_list %}
+                                        {% for seedseed in ss_list %}
+                                                <a href="{% static seedseed.image_dir %}{{seedseed.image_file}}" data-lightbox="seedseed" data-title="
+                                                    <h6><small>{{image.id}}: {{seedseed.imgname}}
+                                                    {% if seedseed.text_data %}{{seedseed.text_data|safe}}{% endif %}</small></h6>">
+                                                    <img  class="thumbnails thumbnails2" alt="" src="{% static seedseed.image_dir %}{{seedseed.image_file}}">
+                                                </a>
+                                        {% endfor %}
+                                    {% else %}
+                                            <img class="thumbnails thumbnails2" src="{% static 'utils/images/noimage4.jpg' %}" style="border:0"/>
+                                    {% endif %}
+                                    <span  class="offsp"><br>
+                                    {% if hybrid.seed_id.hybrid.seed_id %}
+                                            <a href="{% url 'detail:species' hybrid.seed_id.hybrid.seed_id.pid %}?tab=sum&att=">{{hybrid.seed_id.hybrid.seed_id.abrevname|safe}}</a>
+                                    {% else %}
+                                        No Data
+                                    {% endif %}
+                                    </span>
+                                </div>
+                                <!--Seed Pollen-->
+                                <div class="sp">
+                                    {% if sp_list %}
+                                        {% for seedpol in sp_list %}
+                                            <a href="{% static seedpol.image_dir %}{{seedpol.image_file}}" data-lightbox="seedpol" data-title="
+                                                <h6><small>{{image.id}}: {{seedpol.imgname}}
+                                                {% if seedpol.text_data %}{{seedpol.text_data|safe}}{% endif %}</small</h6>">
+                                                <img  class="thumbnails thumbnails2" alt="" src="{% static seedpol.image_dir %}{{seedpol.image_file}}">
+                                            </a>
+                                        {% endfor %}
+                                    {% else %}
+                                            <img class="thumbnails thumbnails2" src="{% static 'utils/images/noimage4.jpg' %}" style="border:0"/>
+                                    {% endif %}
+                                   <span class="offsp"><br>
+                                    {% if hybrid.seed_id.hybrid.pollen_id %}
+                                            <a href="{% url 'detail:hybrid' hybrid.seed_id.hybrid.pollen_id.pid %}?tab=sum&att=">{{hybrid.seed_id.hybrid.pollen_id.abrevname|safe}}</a>
+                                    {% else %}
+                                        No Data
+                                    {% endif %}
+                                    </span>
+                                </div>
+                            {% elif hybrid.seed_id.type == 'species' %}
+                                <div class="sp-none"></div>
+                            {% endif %}
+                        </div>
+
+                        <!--Pollen Parent -->
+                        <div class="s" style="display:block;float: left; width:49.5%; height:auto; ">
+                            <div style="font-size: 14px; text-align:center"><b>Pollen Parent</b></div>
+                            <div class="parent">
+                                {% if pollimg_list %}
+                                    {% for pol in pollimg_list %}
+                                        <a href="{% static pol.image_dir %}{{pol.image_file}}" data-lightbox="pol" data-title="
+                                            <h6><small>{{image.id}}: {{pol.imgname}}
+                                            {% if pol.text_data %}{{pol.text_data|safe}}{% endif %}</small></h6>">
+                                            <img  class="thumbnails thumbnails2" alt="" src="{% static pol.image_dir %}{{pol.image_file}}">
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    <img class="thumbnails thumbnails2"  alt="" src="{% static 'utils/images/noimage4.jpg' %}" style="border:0"/>
+                                {% endif %}
+                                <div class="parent-text">
+                                    {% if hybrid.pollen_id.pid %}
+                                    <a href="{% url 'detail:hybrid' hybrid.pollen_id.pid %}?tab=sum&att=">{{hybrid.registered_pollen_name|safe}}</a>
+                                    {% if hybrid.pollen_id.textspeciesname != hybrid.pollen_species %}(syn. {{hybrid.pollen_id.namecasual|safe}}){% endif %}
+                                    {% else %}
+                                        No Data
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!--Pollen Grand parents-->
+                                <!--pollen Seed-->
+                            {%if hybrid.pollen_id.type == 'hybrid' %}
+                                <div class="ss">
+                                    {% if ps_list %}
+                                        {% for polseed in ps_list %}
+                                            <a href="{% static polseed.image_dir %}{{polseed.image_file}}" data-lightbox="polseed" data-title="
+                                            <h6><small>{{image.id}}: {{polseed.imgname}}
+                                                {% if polseed.text_data %}{{polseed.text_data|safe}}{% endif %}
+                                                </small></h6>">
+                                                <img class="thumbnails thumbnails2"  alt="" src="{% static polseed.image_dir %}{{polseed.image_file}}">
+                                            </a>
+                                        {% endfor %}
+                                    {% else %} <!-- if seed_list -->
+                                        <img class="thumbnails thumbnails2"  src="{% static 'utils/images/' %}noimage4.jpg" style="border:0"/>
+                                    {% endif %}
+                                    <span  class="offsp"><br>
+                                    {% if hybrid.pollen_id.hybrid.seed_id %}
+                                            <a href="{% url 'detail:hybrid' hybrid.pollen_id.hybrid.seed_id.pid %}?tab=sum&att=">{{hybrid.pollen_id.hybrid.seed_id.abrevname|safe}}</a>
+                                    {% else %}
+                                        No Data
+                                    {% endif %} <!-- if pollenpollen_id -->
+                                    </span>
+                                </div>
+                                <!--Pollen Pollen-->
+                                <div class="sp">
+                                    {% if pp_list %}
+                                        {% for polpol in pp_list %}
+                                            <a href="{% static polpol.image_dir %}{{polpol.image_file}}" data-lightbox="polpol" data-title="
+                                                <h6><small>{{image.id}}: {{polpol.imgname}}
+                                                {% if polpol.text_data %}{{polpol.text_data|safe}}{% endif %}
+                                                </small></h6>">
+                                                    <img class="thumbnails thumbnails2" alt="" src="{% static polpol.image_dir %}{{polpol.image_file}}">
+                                            </a>
+                                        {% endfor %}
+                                    {% else %} <!-- if seed_list -->
+                                        <img class="thumbnails thumbnails2" src="{% static 'utils/images/' %}noimage4.jpg" style="border:0"/>
+                                    {% endif %}
+                                    <span class="offsp"><br>
+                                    {% if hybrid.pollen_id.hybrid.pollen_id %}
+                                        {% if hybrid.pollen_id %}
+                                            <a href="{% url 'detail:species' hybrid.pollen_id.hybrid.pollen_id.pid %}?tab=sum&att=">{{hybrid.pollen_id.hybrid.pollen_id.abrevname|safe}}</a>
+                                        {% else %}
+                                            na
+                                        {% endif %}
+                                    {% else %}
+                                        No Data
+                                    {% endif %} <!-- if pollenpollen_id -->
+                                    </span>
+                                </div>
+                            {% elif hybrid.pollen_id.type == 'species' %}
+                                <div class="sp-none"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <br>
+                    <div style="clear:left"></div>
+                    <!--Species ancestors row   -->
+                    <div style="min-height:200px;display:block; text-align: center">
+                        <br>
+                        <br>
+                    <hr>
+                    <div style="width: 100%; margin:0; text-align: center;font-size: 16px;"><b>Species Ancestors {{ancspc_list.count}}</b></div>
+                    <div class="anc">
+                        {% if ancspc_list %}
+                            {% for p in ancspc_list %}
+                                <div style="display:inline-block;">
+                                    {% if p.img %}
+                                            <a href="/static/utils/images/species/{{p.img}}" data-lightbox="anc" data-title="
+                                                <h6><small>{{image.id}}: {{p.aid.abrevname|safe}}
+                                                {% if p.text_data %}{{p.text_data|safe}}{% endif %}</small></h6>">
+                                                    <img class="thumbnails thumbnails3"  alt="" src="/static/utils/images/species/{{p.img}}">
+                                            </a>
+                                    {% else %}
+                                        <img class="thumbnails thumbnails3" src="{% static 'utils/images/noimage4.jpg' %}" style="border:0"/>
+                                    {% endif %}
+                                    <br>
+                                    <div style="clear:left;font-size:9px;line-height:10px; height:40px"><br>
+                                        <a href="{% url 'detail:species' p.aid.pid %}?tab=sum&att=">
+                                        {% if p.aid.pid > 0 %}{{p.aid.abrevname|safe}}
+                                        {% else %}no data
+                                        {% endif %}
+                                        </a>
+                                        <br>
+                                        {{p.pct}}%
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+
+                    <br><br>
+                    <!--Progeny -->
+                    <div style="clear:left;margin:0 auto;font-size:11px;">
+                         {% if offspring_count > 0 %}
+                        <div style="text-align: center;font-size: 16px; border:0;"><b>Immediate Offspring</b><br>* indicates available images<br></div>
+                        <!--seed offspring-->
+                         <div style="clear:left;margin:0 auto;border: 0 solid blue;">
+                             <table class="table table-sm table-hover table-condensed table-border offsp" style="margin: 0 auto;width:100%; border:1px solid #ccc;">
+                                 <tr bgcolor="#e3e3e3">
+                                     <th class="border-rb">Grex</th><th class="border-rb">Seed Parent</th><th class="border-rb">Pollen Parent</th></tr>
+                                  {% for off in offspring_list %}
+                                 <tr >
+                                     <td class="border-lb" style="text-align: left">
+                                         <a href="{% url 'detail:hybrid' off.pid.pid %}?tab=sum&att=">
+                                         <span style="font-zize:11px">
+                                             {{off.pid.namecasual |safe}}
+                                             {% if off.num_image %} *{% endif %}
+                                         </span>
+                                         </a> </td>
+                                     <td class="border-rb" style="text-align: left;">
+                                         {% if off.seed_id %}
+                                            <a href="{% url 'detail:hybrid' off.seed_id.pid %}?type={{type}}&tab=sum">{{off.registered_seed_name|safe }}</a>
+                                         {% else %}
+                                            na
+                                         {% endif %}
+                                     </td>
+                                     <td class="border-rb" style="text-align: left;">
+                                         {% if off.pollen_id %}
+                                            <a href="{% url 'detail:hybrid' off.pollen_id.pid %}?type={{type}}&tab=sum">{{off.registered_pollen_name|safe }}</a>
+                                         {% else %}
+                                            na
+                                         {% endif %}
+                                     </td>
+                                 </tr>
+                                 {% endfor %}
+                             </table>
+                         </div>
+                        {% endif %}
+                    </div>
+
+                <!--Comments-->
+                {%  elif tab == "comm" %}
+                    <div class="tab-pane active" id="comm" >
+
+                    <div style="margin-left: 5%; width: 85%; font-size: 13px" >
+                        <p>
+                            You must login to add your comment.
+                            Tell us about your experience with this grex, its description, growing condition, flowering season,
+                            or other species it is easily mistaken for.
+                            If you see any photo that may have been misidentified please tell us. Be specific and
+                            include id of the photo(s) you address.
+                        </p>
+                        <form id="commentform" action="{% url 'detail:comment' %} " method="POST">
+                            <select id="myselectbox" name="reason" required>
+                                <option value="">Select reason</option>
+                                <option value="report">Report error</option>
+                                <option value="response">Response to error report</option>
+                                <option value="info">Information</option>
+                            </select>
+                            <a class="button button1" style="display:block;float:left;margin:0;padding:0;height:25px;width:180px;font-size: 14px" href="{% url 'detail:comments' %}?sort=-latest&prev_sort=latest&att=">Go to full list</a>
+                            <textarea style="width: 100%; white-space: normal; poadding:5px; text-align: left; font-size: 13px; -moz-text-align-last: left;text-align-last: left;"  rows="6"  name="memo" form="commentform"></textarea>
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="hybrid" />
+                            <input type="hidden" name="id" value="{{id}}" />
+                            <input type="hidden" name="pid" value="{{species.pid}}" />
+                            <input type="submit" id="com_submit" >
+
+                        </form>
+
+                    </div>
+                    {% if comment_list %}
+                        <br>
+                        <div align="center" style="width: 90%; margin:0 30px">
+
+                             <ul style="list-style-type:none">
+                                {% for com in comment_list %}
+                                    <li>
+                                        <div class="post-body" style="background-color: #f5f5f5;margin-bottom:10px;padding:2px 8px; font-size: 12px">
+                                            <div class="post-inner">
+                                                <p style="border: 0 solid lightgray; text-align: left;">
+                                                    {%  if com.id_list %}[{{ com.id_list }}]: {% endif %}{{ com.memo|safe }}
+                                                </p>
+                                            </div>
+                                            <div style="text-align: right">
+                                                <span class="user-info">
+                                                    {% if com.user.displayname %}
+                                                        {{ com.user.displayname }}</span>
+                                                    {% else %}
+                                                        {{ com.user }}
+                                                    {% endif %}
+                                                <span class="comment-date">:  {{ com.modified_date }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    </div>
+                {% endif %}
+                {# TODO: name comes before form #}
+                {# TODO: Add a list of similar hybrids based on % ancestry #}
+                <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('#myTab a[href="' + activeTab + '"]').tab('show');
+    }
+});
+
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('#myTab2 a[href="' + activeTab + '"]').tab('show');
+    }
+});
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+$('.basicAutoSelect').autoComplete();
+
+
+</script>
+
+{% endblock %}
+
+

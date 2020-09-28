@@ -1,0 +1,46 @@
+<!--Title-->
+<br>
+<br>
+    {% if species.pid == 0 %}
+          <div style="margin:0 auto;font-size: 15px; text-align: center;width:80%"><br>
+                <br><br>
+                Please select a species from your species/hybrid lists below. You can also search for a species using the search box or select one from the dropdown lists in the top navigation bar.
+                <br><br>
+            </div>
+    {% else %}
+        <div class="detail-title" style="text-align:center">
+            <b><a href="{% url 'orchidlist:browse' %}?type={{species.type}}&gen={{species.gen_id}}"><i>{{species.genus}}</i></a> {{species.speciesname|safe}}</b>
+                {% if species.author %}{{species.author}} {% endif %}
+                {% if species.year %}({{species.year}}) {% endif %}
+                 <a href="{{species.sourceurl}}" target="_blank">{{species.source}}</a> ({{species.status}})
+            {% if species.type == 'hybrid' %}
+                <br>(
+                {% if species.hybrid.seed_id.pid %}
+                    {% if species.hybrid.seed_species == species.hybrid.seed_id.species %}
+                        {{species.hybrid.seed_id.name|safe}}
+                    {% else %}
+                        {{species.hybrid.registered_seed_name|safe}} (syn. {{species.hybrid.seed_id.name|safe}})
+                    {% endif %}
+                {% else %}
+                    na
+                {% endif %}
+
+                ×
+
+                {% if species.hybrid.pollen_id.pid %}
+                    {% if species.hybrid.pollen_species == species.hybrid.pollen_id.species %}
+                        {{species.hybrid.pollen_id.name|safe}}
+                    {% else %}
+                        {{species.hybrid.registered_pollen_name|safe}} (syn. {{species.hybrid.pollen_id.name|safe}})
+                    {% endif %}
+                {% else %}
+                    na
+                {% endif %}
+                )
+            {% endif %}
+
+            <br>
+        </div>
+        <div style="clear:left;"></div>
+    {% endif %}
+

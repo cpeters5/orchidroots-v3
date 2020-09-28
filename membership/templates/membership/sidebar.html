@@ -1,0 +1,53 @@
+<style>
+    .genus {
+        font-size:14px;
+    }
+    .mylist {
+        max-height:500px;
+        overflow-y: auto;
+        font-size:12px;
+        color: blue;
+        line-height: 1;
+    }
+@media only screen and (max-width: 600px) {
+    .mylist {
+        max-height: 50px;
+    }
+}
+</style>
+
+                 <div class="mylist">
+                     <h6>My Species</h6>
+             {% if myspecies_list %}
+                     <ul style="list-style-type:none;padding-left:20px;">
+                     {% for x in myspecies_list %}
+                        {% if x.0.genus != x.1 %}
+                         <li><a href="{% url 'membership:browse' %}?genus={{x.0.genus}}&type=species&tab=pri&author={{author.author_id}}&att="><strong>{{x.0.genus}}</strong></a></li>
+                            <li><a href="{% url 'membership:species' %}?pid={{x.0.pid}}&type=species&tab=spc&author={{author.author_id}}&att=">&nbsp;&nbsp;&nbsp;{{x.0.speciesname|safe}}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'membership:species' %}?pid={{x.0.pid}}&type=species&tab=spc&author={{author.author_id}}&att=">&nbsp;&nbsp;&nbsp;{{x.0.speciesname|safe}}</a></li>
+                        {% endif %}
+                     {% endfor %}
+                     </ul>
+             {% endif %}
+                 </div>
+
+                 <hr>
+
+             <div class="mylist">
+                 <h6>My Hybrids</h6>
+             {% if myhybrid_list %}
+                     <ul style="list-style-type:none;padding-left:20px">
+                     {% for x in myhybrid_list %}
+                        {% if x.0.genus != x.1 %}
+                         <li><a href="{% url 'membership:browse' %}?genus={{x.0.genus}}&type=hybrid&tab=pri&author={{author.author_id}}&att="><strong>{{x.0.genus}}</strong></a></li>
+<!--                            <li><a href="{% url 'detail:myphoto' x.0.pid %}?type=hybrid&tab=pri&author={{author.author_id}}&att=">{{x.0.genus}}</a></li>-->
+                            <li><a href="{% url 'membership:hybrid' %}?pid={{x.0.pid}}&type=hybrid&tab=hyb&author={{author.author_id}}&att=">&nbsp;&nbsp;&nbsp;{{x.0.speciesname|safe}}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'membership:hybrid' %}?pid={{x.0.pid}}&type=hybrid&tab=hyb&author={{author.author_id}}&att=">&nbsp;&nbsp;&nbsp;{{x.0.speciesname|safe}}</a></li>
+                        {% endif %}
+                     {% endfor %}
+                     </ul>
+             {% endif %}
+                 </div>
+             <hr>

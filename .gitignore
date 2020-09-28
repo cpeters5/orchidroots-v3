@@ -1,0 +1,8 @@
+settings.py
+__pycache__/
+migrations/
+old/
+src/
+.idea/
+*.pyc
+bin/

@@ -1,0 +1,24 @@
+{% load static %}
+{% include "base.html" %}
+{% block body %}
+
+<br><br>
+
+<div class="container" style="margin:0 auto;">
+    <h3>Thank you for your donation ${{amount_display}}</h3>
+    <div class="dropdown filter">
+        <span class="tooltiptext">Select donation amount</span>
+        <button class="dropdown-toggle filtbtn filtbtn1" type="button" data-toggle="dropdown" style="height:27px; width: 100%;font-size:12px;text-align:left;background-color: white; border:1px solid #ccc" multiple>
+            <span class="txt ">&nbsp;{{sf_obj.subfamily}}</span>
+        </button>
+        <ul class="dropdown-menu" style="font-size: 11px;padding:0;width:80px;">
+            <li><a href="{% url 'membership:donateapp' %}?donateamt=500">$5</a></li>
+            <li><a href="{% url 'membership:donateapp' %}?donateamt=1000">$10</a></li>
+            <li><a href="{% url 'membership:donateapp' %}?donateamt=1500">$15</a></li>
+            <li><a href="{% url 'membership:donateapp' %}?donateamt=2000">$20</a></li>
+        </ul>
+
+    </div>
+</div>
+
+{% endblock %}

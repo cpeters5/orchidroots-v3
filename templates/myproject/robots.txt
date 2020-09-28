@@ -1,0 +1,5 @@
+      User-agent: *
+      Disallow: /accounts/
+      Disallow: /natural/
+      Disallow: /orchid/
+      Disallow: /orchidlite/
